@@ -18,5 +18,13 @@ VALUES (1, 'HR Representative', 90000, 1),
        (10, 'Lead Engineer', 160000, 5); 
 
 INSERT INTO employee(id, first_name, last_name, role_id, manager_id)
-VALUES (1, 'David', 'Vasquez', 'HR Representative', 'null'),
-       (2, 'Sam', 'Smith', 'HR Team Lead', ) 
+VALUES (1, 'David', 'Vasquez', 'HR Representative', 'Sam'),
+       (2, 'Sam', 'Smith', 'HR Team Lead', 'null'),
+       (3, 'Vicky', 'Layne', 'Sales Representative', 'Jim'),
+       (4, 'Jim', 'Halpert', 'Sales Team Lead', 'null'),
+       (5, 'Thomas', 'Newman', 'Accountant', 'Rachel'),
+       (6, 'Rachel', 'Green', 'Account Manager', 'null'),
+       (7, 'Bob', 'Vance', 'Lawyer', 'Gabriel'),
+       (8, 'Gabriel', 'Lopez', 'Legal Team Lead', 'null'),
+       (9, 'Sarah', 'Madrid', 'Software Engineer', 'Holly'),
+       (10, 'Holly', 'Davidson', 'Lead Engineer', 'null'); 

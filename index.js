@@ -23,7 +23,7 @@ const db = mysql.createConnection(
   );
 
 
-  inquirer
+inquirer
   .prompt([
     {
       type: 'input',
@@ -31,11 +31,14 @@ const db = mysql.createConnection(
       name: 'options',
       choices: ['view all departments', 'view all roles', 'view all employees', 'add a department', 'add a role', 'add an employee', 'update an employee role', 'Quit']
     },
-  ])
+  ]);
+
 // a query database for displaying in command-line
 db.query('SELECT * FROM company_db', function (err, results){
     console.log(results);
 });
+
+
 // default response
 app.use((req, res) => {
     res.status(404).end();
