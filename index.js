@@ -23,8 +23,7 @@ const db = mysql.createConnection(
     console.log(`Connected to the company_db database.`)
   );
 
-inquirer
-  .prompt([
+const tracker = [
     {
       type: 'list',
       message: 'What would you like to do?',
@@ -40,29 +39,20 @@ inquirer
           'Quit'
       ]
     }
-  ])
-   .then((response) => {
-    console.log(response)
-  });
+  ];
 
+inquirer.prompt(tracker).then((response) => {
+  if(response.options === 'view all departments') {
+    db.query('SELECT * FROM department', function (err, results)
+    {  console.table (results)
+   });
+  } else if(response.options === 'view all roles') {
+   db.query('SELECT * FROM role', function (err, results)
+    {console.table (results)});
+  } else if(response.options === 'view all employees') {
+   db.query('SELECT * FROM employee', function (err, results)
+    {console.table (results)});
+  }
+});
 
-  db.query('SELECT * FROM department', function (err, results)
-   { console.table (results) });
-
-  // if(response.options === 'view all departments') {
-  //   db.query('SELECT * FROM department', function (err, results)
-  //   {  console.table (results)
-  //  });
-  // } else if(response.options === 'view all roles') {
-  //  db.query('SELECT * FROM role', function (err, results)
-  //   {console.table (results)});
-  // } else if(response.options === 'view all employees') {
-  //  db.query('SELECT * FROM employee', function (err, results)
-  //   {console.table (results)});
-  // }
-
-// a query database for displaying in command-line
-// db.query('SELECT * FROM department', function (err, results) {
-//     console.log(results);
-//   });
 
