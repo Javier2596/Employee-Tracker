@@ -2,7 +2,6 @@ const inquirer = require('inquirer');
 //const fs = require('fs');
 //const express = require('express');
 const mysql = require('mysql2');
-const cTable = require('console.table');
 
 //const PORT = process.env.PORT || 3001;
 //const app = express();
@@ -63,9 +62,11 @@ const db = mysql.createConnection(
       db.query('SELECT * FROM employee', function (err, results)
         {console.table (results), next()});
       } else if(response.options === 'add a department') {
-        return addSomething();
+        return addDepartment();
       } else if(response.options === 'add a role') {
-        return addSomething();
+        return addRole();
+      } else if(response.options === "add an employee") {
+        return addEmployee();
       }
       
     })};
@@ -78,7 +79,7 @@ const db = mysql.createConnection(
       });
     }
 
-    function addSomething () {
+    function addDepartment () {
       inquirer
         .prompt([
           {
@@ -89,11 +90,42 @@ const db = mysql.createConnection(
         ])
         .then(val => {
           if(val.department) {
-            db.query('INSERT INTO department' + val.department), console.log('added department')
-          }
+            db.query('INSERT INTO department' + val.department), console.log('added department!')
+          } return results();
         });
     }
-  
+    
+    function addRole () {
+      inquirer
+        .prompt([
+          {
+            type: 'input',
+            name: 'role',
+            message: 'Enter a new role name'
+          }
+        ])
+        .then(val => {
+          if(val.role) {
+            db.query('INSERT INTO role' + val.role), console.log('added role!')
+          } return results();
+        });
+    }
+
+    function addEmployee () {
+      inquirer
+        .prompt([
+          {
+            type: 'input',
+            name: 'employee',
+            message: 'Enter a new employee'
+          }
+        ])
+        .then(val => {
+          if(val.employee) {
+            db.query('INSERT INTO employee' + val.employee), console.log('added new employee!')
+          } return results();
+        });
+    }
 
     function quit() {
       console.log('Goodbye');
