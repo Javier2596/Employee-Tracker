@@ -79,18 +79,24 @@ const db = mysql.createConnection(
       });
     }
 
-    function addDepartment () {
+    function addDepartment (body) {
       inquirer
         .prompt([
           {
             type: 'input',
             name: 'department',
-            message: 'Enter a new department name'
+            message: 'Enter a new department id and name '
           }
         ])
         .then(val => {
           if(val.department) {
-            db.query('INSERT INTO department' + val.department), console.log('added department!')
+            const sql = `INSERT INTO department(id, name) VALUES ${val.department}`;
+            db.query(sql, (err, result) => {
+              if (err) {
+                console.log(err)
+              }
+              console.table(result);
+            });
           } return results();
         });
     }
@@ -106,7 +112,7 @@ const db = mysql.createConnection(
         ])
         .then(val => {
           if(val.role) {
-            db.query('INSERT INTO role' + val.role), console.log('added role!')
+            db.query('INSERT INTO role' + val.role);
           } return results();
         });
     }
@@ -122,7 +128,7 @@ const db = mysql.createConnection(
         ])
         .then(val => {
           if(val.employee) {
-            db.query('INSERT INTO employee' + val.employee), console.log('added new employee!')
+            db.query('INSERT INTO employee' + val.employee);
           } return results();
         });
     }
