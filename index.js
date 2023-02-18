@@ -1,14 +1,5 @@
 const inquirer = require('inquirer');
-//const fs = require('fs');
-//const express = require('express');
 const mysql = require('mysql2');
-
-//const PORT = process.env.PORT || 3001;
-//const app = express();
-
-// app.use(express.urlencoded({ extended: false }));
-// app.use(express.json());
-
 
 const db = mysql.createConnection(
     {
@@ -85,12 +76,12 @@ const db = mysql.createConnection(
           {
             type: 'input',
             name: 'department',
-            message: 'Enter a new department id and name '
+            message: 'Enter a new department name '
           }
         ])
         .then(val => {
           if(val.department) {
-            const sql = `INSERT INTO department(id, name) VALUES ${val.department}`;
+            const sql = `INSERT INTO department(name) VALUES ${val.department}`;
             db.query(sql, (err, result) => {
               if (err) {
                 console.log(err)
